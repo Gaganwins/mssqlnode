@@ -10,10 +10,10 @@ const userDetails = sequelizeConn.define<UserDetailsModel, UserDetailAddModel>('
     address: Sequelize.STRING,
     zipcode: Sequelize.STRING
 });
-userDetails.hasOne(countryDetails);
-countryDetails.belongsTo(userDetails, {
-  foreignKey: 'stateId'
-});
+// userDetails.hasOne(countryDetails);
+// countryDetails.belongsTo(userDetails, {
+//   foreignKey: 'stateId'
+// });
 export const usersDetail = {
     userDetails
 }

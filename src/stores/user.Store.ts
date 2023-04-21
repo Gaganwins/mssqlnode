@@ -21,7 +21,7 @@ export default class userStore {
     }
 
     getAll(){
-        return User.UserModel.findAll({
+        return User.UserModel.findAll({attributes: ['id', 'firstName', 'lastName', 'email'],
             include:[{model: usersDetail.userDetails}]
         });
     }

@@ -15,5 +15,5 @@ export interface UserDetailsModel extends Sequelize.Model<UserDetailsModel,UserD
     zipcode: string,
     createdAt: string,
     updatedAt: string,
-    countryDetail: countryModel
+    // countryDetail: countryModel
 }

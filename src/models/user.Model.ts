@@ -5,8 +5,8 @@ import { usersDetail } from './userDetails.Model';
 
 let userDetails = usersDetail.userDetails;
  const UserModel = sequelizeConn.define<UserModel, UserAddModel>('user',{
-    FirstName: Sequelize.STRING,
-    LastName: Sequelize.STRING,
+    firstName: Sequelize.STRING,
+    lastName: Sequelize.STRING,
     email: Sequelize.STRING,
     password: Sequelize.STRING
 });

@@ -12,8 +12,8 @@ let newUser = async function (req: Request, res: Response) {
     try {
         //validation
         const schema = joi.object({
-            FirstName: joi.string().required(),
-            LastName: joi.string().required(),
+            firstName: joi.string().required(),
+            lastName: joi.string().required(),
             email: joi.string().required(),
             password: joi.string().required()
         });
@@ -24,7 +24,6 @@ let newUser = async function (req: Request, res: Response) {
         }
         
         //email exist validation
-        console.log('email',params.value.email)
         let emailExist = await userData.findByEmail({ email: params.value.email });
         // return;
         if (emailExist && emailExist?.length != 0) {
@@ -33,8 +32,8 @@ let newUser = async function (req: Request, res: Response) {
 
         let userInput = {
             id:params.value.id,
-            FirstName: params.value.FirstName,
-            LastName: params.value.LastName,
+            firstName: params.value.firstName,
+            lastName: params.value.lastName,
             email: params.value.email,
             password: params.value.password
         }
@@ -42,8 +41,7 @@ let newUser = async function (req: Request, res: Response) {
         userInput.password = await bcrypt.hash(userInput.password, 10);
         
         //create user
-        let user;
-        user = await userData.createUser(userInput);
+        let user = await userData.createUser(userInput);
         console.log('user------------',user);
         
         return SendResponse(res, { message: 'User created' }, STATUS_CODES.CREATED);
@@ -59,12 +57,16 @@ let getAll = async function (req: Request, res: Response) {
         let allUsers = await userData.getAll();
         
         if (allUsers && allUsers?.length != 0) {
+            console.log('allUsers',allUsers['user']);
+            // let users = [
+            //     'id':
+            // ]
             return SendResponse(res, { users: allUsers }, STATUS_CODES.OK);
         }else{
             return SendResponse(res, { message: 'No user found' }, STATUS_CODES.BAD_REQUEST);
         }
     }catch(err){
-        console.log(e);
+        // console.log(e);
         return SendResponse(res, { message: 'service failed' }, STATUS_CODES.BAD_REQUEST);
     }
 }
